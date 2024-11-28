@@ -1,3 +1,4 @@
+/* メインコンテンツのスタイル */
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
@@ -64,11 +65,11 @@ button:hover {
     background: #5a6268;
 }
 
-/* メニュー */
+/* メニューのスタイル */
 #menu {
     position: fixed;
     top: 0;
-    left: -100%; /* 初期状態で画面外に配置 */
+    left: -100%;
     width: 33.33%;
     height: 100%;
     background-color: #333;
@@ -80,25 +81,20 @@ button:hover {
     flex-direction: column;
     z-index: 1000;
 }
-
 #menu ul {
     list-style: none;
     padding: 0;
 }
-
 #menu ul li {
     margin: 10px 0;
 }
-
 #menu ul li a {
     color: white;
     text-decoration: none;
 }
-
 #menu ul li a:hover {
     text-decoration: underline;
 }
-
 #close-menu {
     background-color: transparent;
     color: white;
@@ -107,12 +103,11 @@ button:hover {
     align-self: flex-end;
     cursor: pointer;
 }
-
 #menu-button {
     position: fixed;
     top: 10px;
     left: 10px;
-    background-color: #007BFF;
+    background-color: #007bff;
     color: white;
     border: none;
     padding: 10px;
@@ -120,11 +115,9 @@ button:hover {
     cursor: pointer;
     z-index: 1001;
 }
-
 #menu-button:hover {
     background-color: #0056b3;
 }
-
 #menu.open {
-    left: 0; /* メニューを画面内にスライドイン */
+    left: 0;
 }
