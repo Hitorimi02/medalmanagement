@@ -104,19 +104,20 @@ button:hover {
     cursor: pointer;
 }
 #menu-button {
-    position: fixed;
-    top: 10px;
-    left: 10px;
+    position: fixed;       /* 画面に固定 */
+    top: 10px;             /* 上から10px */
+    left: 10px;            /* 左から10px */
     background-color: #007BFF;
     color: white;
     border: none;
-    padding: 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    z-index: 1001;
-    width: auto; /* 自動幅に設定 */
-    max-width: 200px; /* 必要なら最大幅を指定 */
+    padding: 10px;         /* ボタン内の余白 */
+    border-radius: 4px;    /* ボタンの角を丸める */
+    cursor: pointer;       /* マウスポインターを変更 */
+    z-index: 1001;         /* 他の要素より前面に表示 */
+    width: auto;           /* 幅を自動調整 */
+    display: inline-block; /* 必要以上に広がらないよう設定 */
 }
+
 
 #menu-button:hover {
     background-color: #0056b3;
