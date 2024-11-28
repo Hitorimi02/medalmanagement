@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>カレンダーアプリ</title>
+    <link rel="stylesheet" href="index_style.css">
+</head>
+<body>
+    <!-- メニュー -->
+    <div id="menu">
+        <button id="close-menu">×</button>
+        <ul>
+            <li><a href="#home">ホーム</a></li>
+            <li><a href="#settings">設定</a></li>
+            <li><a href="#help">ヘルプ</a></li>
+            <li><a href="../store_register/store_register.html">店舗登録</a></li> <!-- 新しいリンク -->
+            <li><a href="../store_list/store_list.html">登録店舗リスト</a></li> <!-- 店舗リストへのリンクを追加 -->
+        </ul>
+    </div>
+
+    <!-- メニューボタン -->
+    <button id="menu-button">≡</button>
+
+    <!-- カレンダー -->
+    <h1>カレンダー</h1>
+    <div id="calendar-header">
+        <button id="prev-month">＜</button>
+        <span id="current-month"></span>
+        <button id="next-month">＞</button>
+    </div>
+    <div id="calendar"></div>
+
+    <script src="index_script.js"></script>
+</body>
+</html>

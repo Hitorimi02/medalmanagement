@@ -1,0 +1,136 @@
+/* 全体のスタイル */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+    height: 100vh;
+    position: relative;
+}
+
+/* カレンダーのヘッダー */
+#calendar-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#calendar-header button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin: 0 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#calendar-header button:hover {
+    background-color: #0056b3;
+}
+
+#current-month {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* カレンダー */
+#calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    max-width: 400px;
+}
+
+.day, .header {
+    padding: 10px;
+    text-align: center;
+    border: none;
+}
+
+.header {
+    font-weight: bold;
+    background-color: #f3f3f3;
+}
+
+.day {
+    height: 50px;
+}
+
+/* 土曜日を青色にする */
+.saturday {
+    color: blue;
+}
+
+/* 日曜日を赤色にする */
+.sunday {
+    color: red;
+}
+
+/* メニュー */
+#menu {
+    position: fixed;
+    top: 0;
+    left: -100%; /* 初期状態で画面外に配置 */
+    width: 33.33%;
+    height: 100%;
+    background-color: #333;
+    color: white;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    transition: left 0.3s ease;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+#menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+#menu ul li {
+    margin: 10px 0;
+}
+
+#menu ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+#menu ul li a:hover {
+    text-decoration: underline;
+}
+
+#close-menu {
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 20px;
+    align-self: flex-end;
+    cursor: pointer;
+}
+
+#menu-button {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+#menu-button:hover {
+    background-color: #0056b3;
+}
+
+#menu.open {
+    left: 0; /* メニューを画面内にスライドイン */
+}
