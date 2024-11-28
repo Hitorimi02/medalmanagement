@@ -61,11 +61,14 @@ const closeMenuButton = document.getElementById('close-menu');
 menuButton.addEventListener('click', () => {
     menu.classList.add('open');
 });
+
 closeMenuButton.addEventListener('click', () => {
     menu.classList.remove('open');
 });
+
 window.addEventListener('click', (e) => {
     if (!menu.contains(e.target) && !menuButton.contains(e.target)) {
         menu.classList.remove('open');
     }
 });
+
