@@ -107,14 +107,17 @@ button:hover {
     position: fixed;
     top: 10px;
     left: 10px;
-    background-color: #007bff;
+    background-color: #007BFF;
     color: white;
     border: none;
     padding: 10px;
     border-radius: 4px;
     cursor: pointer;
     z-index: 1001;
+    width: auto; /* 自動幅に設定 */
+    max-width: 200px; /* 必要なら最大幅を指定 */
 }
+
 #menu-button:hover {
     background-color: #0056b3;
 }
