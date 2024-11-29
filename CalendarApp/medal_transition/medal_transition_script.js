@@ -1,30 +1,31 @@
 // ローカルストレージから店舗データを取得
 const STORES_KEY = 'storesData';
 const storeSelect = document.getElementById('store-select');
+let currentChart = null; // 現在のチャートを保持する変数
 
 // 店舗一覧をプルダウンに表示
 function populateStoreDropdown() {
-    const storesData = JSON.parse(localStorage.getItem(STORES_KEY)) || {};
-    storeSelect.innerHTML = '<option value="" selected disabled>店舗を選択</option>'; // 初期オプション
+    const storeSelect = document.getElementById('store-select');
+    storeSelect.innerHTML = '<option value="" selected disabled>店舗を選択</option>';
 
-    // storesData が空でないかチェック
+    // localStorage から店舗データを取得
+    const storesData = JSON.parse(localStorage.getItem(STORES_KEY)) || {};
+
     if (Object.keys(storesData).length === 0) {
         console.log('店舗データが存在しません');
-        return; // データがない場合はプルダウンに店舗を追加しない
+        return;
     }
 
-    // 店舗データをプルダウンに追加
-    Object.keys(storesData).forEach(store => {
+    Object.keys(storesData).forEach(storeName => {
         const option = document.createElement('option');
-        option.value = store;
-        option.textContent = store;
+        option.value = storeName;
+        option.textContent = storeName;
         storeSelect.appendChild(option);
     });
 }
 
-
 // 店舗を選択した時の処理
-storeSelect.addEventListener('change', function() {
+storeSelect.addEventListener('change', function () {
     const storeName = storeSelect.value;
     if (storeName) {
         renderMedalTransition(storeName);
@@ -40,9 +41,14 @@ function renderMedalTransition(storeName) {
     const dates = Object.keys(storeData).sort((a, b) => new Date(a) - new Date(b)); // 日付でソート
     const medals = dates.map(date => storeData[date]);
 
+    // 既存のチャートがあれば破棄
+    if (currentChart) {
+        currentChart.destroy();
+    }
+
     // Chart.js で折れ線グラフを描画
     const ctx = document.getElementById('medal-chart').getContext('2d');
-    new Chart(ctx, {
+    currentChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: dates,

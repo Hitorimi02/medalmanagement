@@ -4,20 +4,31 @@ document.getElementById('store-form').addEventListener('submit', function(event)
     const storeName = document.getElementById('store-name').value.trim();
     const storePeriod = parseInt(document.getElementById('store-period').value.trim(), 10); // 保存期間
 
-    let stores = JSON.parse(localStorage.getItem('stores')) || [];
+    // 旧データから新データ形式への変換
+    const oldStores = JSON.parse(localStorage.getItem('stores')) || [];
+    const newStoresData = JSON.parse(localStorage.getItem('storesData')) || {};
 
-    // 同じ名前の店舗が既に登録されているか確認
-    const isDuplicate = stores.some(existingStore => existingStore.name.toLowerCase() === storeName.toLowerCase());
+    oldStores.forEach(store => {
+        if (!newStoresData[store.name]) {
+            newStoresData[store.name] = store.medals || {};
+        }
+    });
 
-    if (isDuplicate) {
+    // 新データ形式をローカルストレージに保存
+    localStorage.setItem('storesData', JSON.stringify(newStoresData));
+
+    // 旧形式のデータを削除（必要に応じてコメントアウト）
+    localStorage.removeItem('stores');
+
+    // 新しい店舗がすでに登録されているか確認
+    if (newStoresData[storeName]) {
         alert(`店舗 "${storeName}" は既に登録されています。`);
-    } else {
-        // 新しい店舗を登録
-        stores.push({ name: storeName, medalDuration: storePeriod, medals: {} });
-
-        // ローカルストレージに店舗リストを保存
-        localStorage.setItem('stores', JSON.stringify(stores));
-
-        alert(`店舗 "${storeName}" を登録しました。`);
+        return;
     }
+
+    // 新店舗を追加
+    newStoresData[storeName] = {}; // 初期状態でメダルデータなし
+    localStorage.setItem('storesData', JSON.stringify(newStoresData));
+
+    alert(`店舗 "${storeName}" を登録しました。`);
 });
