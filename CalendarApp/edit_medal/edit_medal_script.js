@@ -1,64 +1,87 @@
-// URLパラメータから日付情報を取得する
+// 日付情報を取得
 const urlParams = new URLSearchParams(window.location.search);
-const date = urlParams.get('date'); // "date" パラメータを取得
-document.getElementById('selected-date').textContent = `📅 ${date}`; // 取得した日付をページに表示
+const date = urlParams.get('date');
+document.getElementById('selected-date').textContent = `📅 ${date}`;
 
-// 日付を降順（最新が先頭）でソートする関数
-function sortDates(dates) {
-    return dates.sort((a, b) => new Date(b) - new Date(a));
+// ローカルストレージに店舗ごとのデータを保存するキー
+const STORES_KEY = 'storesData';
+
+// 店舗一覧をプルダウンに表示する関数
+function populateStoreDropdown() {
+    const storeSelect = document.getElementById('store-select');
+    storeSelect.innerHTML = '<option value="" selected disabled>店舗を選択</option>'; // 初期オプション
+
+    const storesData = JSON.parse(localStorage.getItem(STORES_KEY)) || {};
+    Object.keys(storesData).forEach(store => {
+        const option = document.createElement('option');
+        option.value = store;
+        option.textContent = store;
+        storeSelect.appendChild(option);
+    });
 }
 
-// 指定された日付より前の最も新しいメダル記録を取得する関数
-function getLastMedalBefore(date) {
-    const allDates = Object.keys(localStorage) // localStorage の全キーを取得
-        .filter(key => key.startsWith('medals_')) // "medals_"で始まるキーを抽出（メダル記録）
-        .map(key => key.replace('medals_', '')) // キーから"medals_"を取り除いて日付を取得
-        .filter(d => new Date(d) < new Date(date)); // 指定日付より前の日付をフィルタリング
-
-    const sortedDates = sortDates(allDates); // 日付を降順にソート
-    if (sortedDates.length === 0) return null; // 該当する日付がない場合は null を返す
-
-    const latestDate = sortedDates[0]; // 最も新しい日付を取得
-    return { 
-        date: latestDate, // 最新の日付
-        medals: parseInt(localStorage.getItem(`medals_${latestDate}`), 10) // 該当日付のメダル枚数を取得
-    };
+// 店舗ごとのメダルデータを取得する関数
+function getStoreData(storeName) {
+    const storesData = JSON.parse(localStorage.getItem(STORES_KEY)) || {};
+    return storesData[storeName] || {};
 }
 
-// 過去のメダルデータを取得
-const previousMedalData = getLastMedalBefore(date);
-const differenceEl = document.getElementById('difference'); // 差分を表示する要素を取得
+// データを保存する関数
+function saveStoreData(storeName, data) {
+    const storesData = JSON.parse(localStorage.getItem(STORES_KEY)) || {};
+    storesData[storeName] = data;
+    localStorage.setItem(STORES_KEY, JSON.stringify(storesData));
+}
 
-// 過去の記録がある場合の処理
-if (previousMedalData) {
-    differenceEl.textContent = `前回 (${previousMedalData.date}) の枚数：${previousMedalData.medals} 枚`;
-} else {
-    // 過去の記録がない場合の表示
-    differenceEl.textContent = '過去の記録はありません';
+// 指定された店舗と日付で過去のメダル記録を取得する関数
+function getLastMedal(storeName, date) {
+    const storeData = getStoreData(storeName);
+    const dates = Object.keys(storeData)
+        .filter(d => new Date(d) < new Date(date)) // 指定日付より前をフィルタリング
+        .sort((a, b) => new Date(b) - new Date(a)); // 降順でソート
+
+    if (dates.length === 0) return null;
+    const latestDate = dates[0];
+    return { date: latestDate, medals: storeData[latestDate] };
 }
 
 // フォーム送信時の処理
-document.getElementById('medal-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // デフォルトのフォーム送信動作をキャンセル
-    const medals = parseInt(document.getElementById('medals').value); // 入力されたメダル枚数を取得
+document.getElementById('medal-form').addEventListener('submit', function (event) {
+    event.preventDefault();
 
-    // 入力されたメダル枚数をlocalStorageに保存
-    localStorage.setItem(`medals_${date}`, medals);
+    const storeName = document.getElementById('store-select').value;
+    const medals = parseInt(document.getElementById('medals').value, 10);
 
-    // 過去の記録がある場合、差分を計算して表示
+    if (!storeName) {
+        alert('店舗を選択してください。');
+        return;
+    }
+
+    const storeData = getStoreData(storeName);
+
+    // 過去の記録を取得
+    const previousMedalData = getLastMedal(storeName, date);
+
+    // データを保存
+    storeData[date] = medals;
+    saveStoreData(storeName, storeData);
+
+    // 差分の計算
+    const differenceEl = document.getElementById('difference');
     if (previousMedalData) {
-        const difference = medals - previousMedalData.medals; // 差分を計算
+        const difference = medals - previousMedalData.medals;
         differenceEl.textContent = `前回 (${previousMedalData.date}) 比：${difference} 枚`;
     } else {
-        // 今回が最初の記録の場合
         differenceEl.textContent = '今回が最初の記録です';
     }
 
-    // 保存完了の通知
-    alert(`メダルが保存されました: ${medals} 枚`);
+    alert(`店舗 "${storeName}" のメダルが保存されました: ${medals} 枚`);
 });
 
 // 「戻る」ボタンの処理
 function goBack() {
-    window.location.href = "../index/index.html"; // カレンダー画面に戻る
+    window.location.href = "../index/index.html";
 }
+
+// ページ読み込み時に店舗一覧を初期化
+populateStoreDropdown();

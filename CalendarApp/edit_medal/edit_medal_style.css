@@ -63,3 +63,28 @@ button:hover {
 #back-button:hover {
     background: #5a6268;
 }
+
+/* プルダウンメニューのスタイル */
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: #fff;
+    color: #333;
+    appearance: none; /* ブラウザごとのデフォルト装飾を無効化 */
+}
+
+/* プルダウンメニューのホバー時の色 */
+select:hover {
+    border-color: #007bff;
+}
+
+/* プルダウンメニューのフォーカス時のアウトライン */
+select:focus {
+    outline: none;
+    border-color: #0056b3;
+    box-shadow: 0 0 5px rgba(0, 91, 179, 0.5);
+}
