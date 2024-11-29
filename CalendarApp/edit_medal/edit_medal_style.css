@@ -36,16 +36,15 @@ label {
     margin-bottom: 10px;
     font-weight: bold;
 }
-input[type="number"] {
-    width: 100%;
+input[type="number"],
+button {
+    width: 100%; /* 幅を統一 */
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 button {
-    width: 100%;
-    padding: 10px;
     background: #007bff;
     color: white;
     border: none;
