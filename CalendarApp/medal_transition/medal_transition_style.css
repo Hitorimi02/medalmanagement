@@ -1,0 +1,17 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f4f4f4;
+    text-align: center;
+}
+
+.store-selector {
+    margin-bottom: 20px;
+}
+
+select {
+    padding: 10px;
+    font-size: 1em;
+    width: 200px;
+    margin-bottom: 20px;
+}
