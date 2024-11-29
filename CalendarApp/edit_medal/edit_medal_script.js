@@ -9,9 +9,18 @@ const STORES_KEY = 'storesData';
 // 店舗のプルダウンを初期化
 function populateStoreDropdown() {
     const storeSelect = document.getElementById('store-select');
-    storeSelect.innerHTML = '<option value="" selected disabled>店舗を選択</option>';
+    storeSelect.innerHTML = '<option value="" selected disabled>店舗を選択</option>'; // 初期オプション
 
+    // localStorage から店舗データを取得
     const stores = JSON.parse(localStorage.getItem('stores')) || [];
+
+    // stores が空でないか確認
+    if (stores.length === 0) {
+        console.log('店舗データが存在しません');
+        return; // データがない場合はプルダウンに店舗を追加しない
+    }
+
+    // 店舗データをプルダウンに追加
     stores.forEach(store => {
         const option = document.createElement('option');
         option.value = store.name;
@@ -19,6 +28,7 @@ function populateStoreDropdown() {
         storeSelect.appendChild(option);
     });
 }
+
 
 // 店舗データを取得
 function getStoreData(storeName) {
