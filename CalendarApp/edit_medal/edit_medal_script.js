@@ -74,5 +74,11 @@ document.getElementById('medal-form').addEventListener('submit', function(event)
     alert(`店舗 "${storeName}" のメダルが保存されました: ${medals} 枚`);
 });
 
+// 「戻る」ボタンの処理
+function goBack() {
+    window.location.href = "../index/index.html"; // カレンダーのページへ遷移
+}
+
+
 // ページ読み込み時に店舗一覧を初期化
 populateStoreDropdown();
