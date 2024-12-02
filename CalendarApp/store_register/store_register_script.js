@@ -4,31 +4,24 @@ document.getElementById('store-form').addEventListener('submit', function(event)
     const storeName = document.getElementById('store-name').value.trim();
     const storePeriod = parseInt(document.getElementById('store-period').value.trim(), 10); // 保存期間
 
-    // 旧データから新データ形式への変換
-    const oldStores = JSON.parse(localStorage.getItem('stores')) || [];
-    const newStoresData = JSON.parse(localStorage.getItem('storesData')) || {};
+    if (!storeName || isNaN(storePeriod)) {
+        alert('店舗名と保存期間を正しく入力してください。');
+        return;
+    }
 
-    oldStores.forEach(store => {
-        if (!newStoresData[store.name]) {
-            newStoresData[store.name] = store.medals || {};
-        }
-    });
-
-    // 新データ形式をローカルストレージに保存
-    localStorage.setItem('storesData', JSON.stringify(newStoresData));
-
-    // 旧形式のデータを削除（必要に応じてコメントアウト）
-    localStorage.removeItem('stores');
+    // ローカルストレージからデータを取得
+    const storesData = JSON.parse(localStorage.getItem('storesData')) || {};
 
     // 新しい店舗がすでに登録されているか確認
-    if (newStoresData[storeName]) {
+    if (storesData[storeName]) {
         alert(`店舗 "${storeName}" は既に登録されています。`);
         return;
     }
 
     // 新店舗を追加
-    newStoresData[storeName] = {}; // 初期状態でメダルデータなし
-    localStorage.setItem('storesData', JSON.stringify(newStoresData));
+    storesData[storeName] = { medalDuration: storePeriod, medals: {} }; // 保存期間とメダルデータを初期化
+    localStorage.setItem('storesData', JSON.stringify(storesData));
 
     alert(`店舗 "${storeName}" を登録しました。`);
+    displayStores(); // 登録後にリストを更新
 });

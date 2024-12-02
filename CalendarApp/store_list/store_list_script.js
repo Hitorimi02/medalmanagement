@@ -17,6 +17,9 @@ function displayStores() {
 
     // 店舗ごとにリストアイテムを作成
     storeNames.forEach(storeName => {
+        const storeData = storesData[storeName]; // 店舗データを取得
+        const { medalDuration = '不明' } = storeData; // 保存期間を取得（デフォルトは「不明」）
+
         const li = document.createElement('li');
         li.style.display = 'flex';
         li.style.justifyContent = 'space-between';
@@ -27,9 +30,9 @@ function displayStores() {
         li.style.borderRadius = '5px';
         li.style.backgroundColor = '#f9f9f9';
 
-        // 店舗名を表示
+        // 店舗名と保存期間を表示
         const storeInfo = document.createElement('span');
-        storeInfo.textContent = `${storeName} - 保存期間: 不明`; // 保存期間のデータがない場合「不明」と表示
+        storeInfo.textContent = `${storeName} - 保存期間: ${medalDuration}日`;
         li.appendChild(storeInfo);
 
         // 削除ボタンを作成
