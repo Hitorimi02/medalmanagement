@@ -17,21 +17,33 @@ function populateStoreDropdown() {
     });
 }
 
-// 店舗を選択した時の処理
+// 店舗選択時の処理
 storeSelect.addEventListener('change', function () {
-    const storeName = storeSelect.value;
-    if (storeName) {
-        renderMedalTransition(storeName);
+    const selectedOptions = Array.from(storeSelect.selectedOptions);
+    const selectedStores = selectedOptions.map(option => option.value);
+    
+    if (selectedStores.length > 0) {
+        renderMedalTransition(selectedStores);
     }
 });
 
 // 店舗ごとのメダル遷移を描画
-function renderMedalTransition(storeName) {
+function renderMedalTransition(storeNames) {
     const storesData = JSON.parse(localStorage.getItem(STORES_KEY)) || {};
-    const storeData = storesData[storeName] || { medals: {} };
+    const mergedData = {}; // 各日付ごとにメダル数を合計
 
-    const dates = Object.keys(storeData.medals).sort((a, b) => new Date(a) - new Date(b)); // 日付でソート
-    const medals = dates.map(date => storeData.medals[date]);
+    storeNames.forEach(storeName => {
+        const storeData = storesData[storeName]?.medals || {};
+        Object.keys(storeData).forEach(date => {
+            if (!mergedData[date]) {
+                mergedData[date] = 0;
+            }
+            mergedData[date] += storeData[date];
+        });
+    });
+
+    const dates = Object.keys(mergedData).sort((a, b) => new Date(a) - new Date(b)); // 日付でソート
+    const medals = dates.map(date => mergedData[date]);
 
     if (currentChart) {
         currentChart.destroy();
@@ -43,7 +55,7 @@ function renderMedalTransition(storeName) {
         data: {
             labels: dates,
             datasets: [{
-                label: `${storeName} のメダル遷移`,
+                label: `選択された店舗のメダル遷移`,
                 data: medals,
                 borderColor: 'rgb(75, 192, 192)',
                 fill: false,
