@@ -27,7 +27,7 @@ storeSelect.addEventListener('change', function () {
     }
 });
 
-// 店舗ごとのメダル遷移を描画 (複数店舗の遷移を同時に表示)
+// 店舗ごとのメダル遷移を描画 (3日間のみ表示、横スクロール対応)
 function renderMedalTransition(storeNames) {
     const storesData = JSON.parse(localStorage.getItem(STORES_KEY)) || {};
     const datasets = [];
@@ -78,12 +78,28 @@ function renderMedalTransition(storeNames) {
         },
         options: {
             responsive: true,
+            plugins: {
+                zoom: {
+                    zoom: {
+                        wheel: {
+                            enabled: true // スクロールでズーム可能
+                        },
+                        mode: 'x'
+                    },
+                    pan: {
+                        enabled: true, // ドラッグで移動可能
+                        mode: 'x'
+                    }
+                }
+            },
             scales: {
                 x: {
                     title: {
                         display: true,
                         text: '日付'
-                    }
+                    },
+                    min: sortedDates[sortedDates.length - 3], // 最新3日間を表示
+                    max: sortedDates[sortedDates.length - 1]
                 },
                 y: {
                     title: {
@@ -105,6 +121,7 @@ function getRandomColor() {
     }
     return color;
 }
+
 
 
 // ページ読み込み時に店舗一覧を初期化
