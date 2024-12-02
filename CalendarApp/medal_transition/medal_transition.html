@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>メダル遷移表</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js の CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>    
     <link rel="stylesheet" href="medal_transition_style.css">
 </head>
 <body>
@@ -14,7 +12,7 @@
     
     <div class="store-selector">
         <label for="store-select">店舗を選択してください：</label>
-        <select id="store-select" multiple></select>
+        <select id="store-select">
             <option value="" selected disabled>店舗を選択</option>
         </select>
     </div>
