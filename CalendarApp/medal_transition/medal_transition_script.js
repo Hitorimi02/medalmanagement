@@ -27,23 +27,43 @@ storeSelect.addEventListener('change', function () {
     }
 });
 
-// 店舗ごとのメダル遷移を描画
+// 店舗ごとのメダル遷移を描画 (複数店舗の遷移を同時に表示)
 function renderMedalTransition(storeNames) {
     const storesData = JSON.parse(localStorage.getItem(STORES_KEY)) || {};
-    const mergedData = {}; // 各日付ごとにメダル数を合計
+    const datasets = [];
+    let allDates = new Set();
 
+    // 各店舗のデータセットを作成
     storeNames.forEach(storeName => {
         const storeData = storesData[storeName]?.medals || {};
-        Object.keys(storeData).forEach(date => {
-            if (!mergedData[date]) {
-                mergedData[date] = 0;
-            }
-            mergedData[date] += storeData[date];
+        const dates = Object.keys(storeData);
+        allDates = new Set([...allDates, ...dates]); // 全日付を収集
+
+        const data = dates.map(date => ({
+            date,
+            medals: storeData[date]
+        })).sort((a, b) => new Date(a.date) - new Date(b.date));
+
+        datasets.push({
+            label: `${storeName} のメダル遷移`,
+            data: data.map(entry => entry.medals),
+            borderColor: getRandomColor(),
+            fill: false,
+            tension: 0.1
         });
     });
 
-    const dates = Object.keys(mergedData).sort((a, b) => new Date(a) - new Date(b)); // 日付でソート
-    const medals = dates.map(date => mergedData[date]);
+    // 日付をソートし配列化
+    const sortedDates = Array.from(allDates).sort((a, b) => new Date(a) - new Date(b));
+
+    // 各データセットの不足部分を補完 (null で埋める)
+    datasets.forEach(dataset => {
+        const filledData = sortedDates.map(date => {
+            const index = Object.keys(storesData[dataset.label.replace(" のメダル遷移", "")]?.medals || {}).indexOf(date);
+            return index > -1 ? dataset.data[index] : null;
+        });
+        dataset.data = filledData;
+    });
 
     if (currentChart) {
         currentChart.destroy();
@@ -53,14 +73,8 @@ function renderMedalTransition(storeNames) {
     currentChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: dates,
-            datasets: [{
-                label: `選択された店舗のメダル遷移`,
-                data: medals,
-                borderColor: 'rgb(75, 192, 192)',
-                fill: false,
-                tension: 0.1
-            }]
+            labels: sortedDates,
+            datasets: datasets
         },
         options: {
             responsive: true,
@@ -81,6 +95,17 @@ function renderMedalTransition(storeNames) {
         }
     });
 }
+
+// ランダムな色を生成する関数
+function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
 
 // ページ読み込み時に店舗一覧を初期化
 populateStoreDropdown();
