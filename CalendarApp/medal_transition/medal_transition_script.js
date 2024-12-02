@@ -8,18 +8,11 @@ function populateStoreDropdown() {
     const storeSelect = document.getElementById('store-select');
     storeSelect.innerHTML = '<option value="" selected disabled>店舗を選択</option>';
 
-    // localStorage から店舗データを取得
     const storesData = JSON.parse(localStorage.getItem(STORES_KEY)) || {};
-
-    if (Object.keys(storesData).length === 0) {
-        console.log('店舗データが存在しません');
-        return;
-    }
-
     Object.keys(storesData).forEach(storeName => {
         const option = document.createElement('option');
         option.value = storeName;
-        option.textContent = storeName;
+        option.textContent = `${storeName} (保存期間: ${storesData[storeName].medalDuration || '不明'}日)`;
         storeSelect.appendChild(option);
     });
 }
@@ -35,18 +28,15 @@ storeSelect.addEventListener('change', function () {
 // 店舗ごとのメダル遷移を描画
 function renderMedalTransition(storeName) {
     const storesData = JSON.parse(localStorage.getItem(STORES_KEY)) || {};
-    const storeData = storesData[storeName] || {};
+    const storeData = storesData[storeName] || { medals: {} };
 
-    // 日付とメダル数の配列を作成
-    const dates = Object.keys(storeData).sort((a, b) => new Date(a) - new Date(b)); // 日付でソート
-    const medals = dates.map(date => storeData[date]);
+    const dates = Object.keys(storeData.medals).sort((a, b) => new Date(a) - new Date(b)); // 日付でソート
+    const medals = dates.map(date => storeData.medals[date]);
 
-    // 既存のチャートがあれば破棄
     if (currentChart) {
         currentChart.destroy();
     }
 
-    // Chart.js で折れ線グラフを描画
     const ctx = document.getElementById('medal-chart').getContext('2d');
     currentChart = new Chart(ctx, {
         type: 'line',

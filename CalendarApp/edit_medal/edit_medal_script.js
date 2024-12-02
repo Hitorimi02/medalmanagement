@@ -11,58 +11,51 @@ function populateStoreDropdown() {
     const storeSelect = document.getElementById('store-select');
     storeSelect.innerHTML = '<option value="" selected disabled>店舗を選択</option>';
 
-    // localStorage から店舗データを取得
-    const storesData = JSON.parse(localStorage.getItem('storesData')) || {};
-
-    if (Object.keys(storesData).length === 0) {
-        console.log('店舗データが存在しません');
-        return;
-    }
-
+    const storesData = JSON.parse(localStorage.getItem(STORES_KEY)) || {};
     Object.keys(storesData).forEach(storeName => {
         const option = document.createElement('option');
         option.value = storeName;
-        option.textContent = storeName;
+        option.textContent = `${storeName} (保存期間: ${storesData[storeName].medalDuration || '不明'}日)`;
         storeSelect.appendChild(option);
     });
 }
 
-
-
 // 店舗データを取得
 function getStoreData(storeName) {
-    const stores = JSON.parse(localStorage.getItem('stores')) || [];
-    return stores.find(store => store.name === storeName);
+    const storesData = JSON.parse(localStorage.getItem(STORES_KEY)) || {};
+    return storesData[storeName] || { medalDuration: null, medals: {} };
 }
 
-function saveStoreData(storeName, data) {
-    const storesData = JSON.parse(localStorage.getItem('storesData')) || {};
+function saveStoreData(storeName, date, medalCount) {
+    const storesData = JSON.parse(localStorage.getItem(STORES_KEY)) || {};
 
     // 該当店舗のデータがない場合は初期化
     if (!storesData[storeName]) {
-        storesData[storeName] = {};
+        alert(`店舗 "${storeName}" が存在しません。`);
+        return;
     }
 
     // メダルデータを保存
-    storesData[storeName][date] = data;
+    if (!storesData[storeName].medals) {
+        storesData[storeName].medals = {};
+    }
+    storesData[storeName].medals[date] = medalCount;
 
     // ローカルストレージに更新データを保存
-    localStorage.setItem('storesData', JSON.stringify(storesData));
+    localStorage.setItem(STORES_KEY, JSON.stringify(storesData));
 }
 
 
-// 差分を計算して表示
 function getLastMedal(storeName, date) {
-    const storesData = JSON.parse(localStorage.getItem('storesData')) || {};
-    const storeData = storesData[storeName] || {};
+    const storesData = JSON.parse(localStorage.getItem(STORES_KEY)) || {};
+    const storeData = storesData[storeName] || { medals: {} };
 
-    const storeDates = Object.keys(storeData).filter(d => new Date(d) < new Date(date));
+    const storeDates = Object.keys(storeData.medals).filter(d => new Date(d) < new Date(date));
     if (storeDates.length === 0) return null;
 
     const lastDate = storeDates.sort((a, b) => new Date(b) - new Date(a))[0];
-    return { date: lastDate, medals: storeData[lastDate] };
+    return { date: lastDate, medals: storeData.medals[lastDate] };
 }
-
 
 // フォーム送信時の処理
 document.getElementById('medal-form').addEventListener('submit', function(event) {
@@ -70,17 +63,22 @@ document.getElementById('medal-form').addEventListener('submit', function(event)
 
     const storeName = document.getElementById('store-select').value;
     const medals = parseInt(document.getElementById('medals').value, 10);
+    const date = new URLSearchParams(window.location.search).get('date');
 
     if (!storeName) {
         alert('店舗を選択してください。');
         return;
     }
 
-    const storeData = getStoreData(storeName);
+    if (isNaN(medals)) {
+        alert('メダル数を正しく入力してください。');
+        return;
+    }
+
     const previousMedalData = getLastMedal(storeName, date);
 
     // メダルデータを保存
-    saveStoreData(storeName, medals);
+    saveStoreData(storeName, date, medals);
 
     // 差分の計算と表示
     const differenceEl = document.getElementById('difference');
