@@ -4,26 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>カレンダーアプリ</title>
-    <link rel="stylesheet" href="index_style.css">
+    <link rel="stylesheet" href="../common/menu_style.css"> <!-- 共通メニューのスタイル -->
+    <link rel="stylesheet" href="index_style.css"> <!-- ページ固有のスタイル -->
 </head>
 <body>
-    <!-- メニュー -->
-    <div id="menu">
-        <button id="close-menu">×</button>
-        <ul>
-            <li><a href="../index/index.html">カレンダー</a></li>
-            <li><a href="../settings/settings.html">設定</a></li>
-            <li><a href="#help">ヘルプ</a></li>
-            <li><a href="../store_register/store_register.html">店舗登録</a></li>
-            <li><a href="../store_list/store_list.html">登録店舗リスト</a></li>
-            <li><a href="../medal_transition/medal_transition.html">メダル遷移</a></li>  <!-- メダル遷移ボタン -->
-        </ul>                
-    </div>
+    <!-- 共通メニューを読み込む部分 -->
+    <div id="menu-container"></div>
 
-    <!-- メニューボタン -->
-    <button id="menu-button">≡</button>
-
-    <!-- カレンダー -->
+    <!-- カレンダー部分 -->
     <h1>カレンダー</h1>
     <div id="calendar-header">
         <button id="prev-month">＜</button>
@@ -32,6 +20,20 @@
     </div>
     <div id="calendar"></div>
 
+    <!-- スクリプト -->
+    <script>
+        // メニューを外部ファイルから読み込む
+        fetch('../common/menu.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('menu-container').innerHTML = data;
+
+                // メニュースクリプトの読み込み
+                const menuScript = document.createElement('script');
+                menuScript.src = "../common/menu_script.js";
+                document.body.appendChild(menuScript);
+            });
+    </script>
     <script src="index_script.js"></script>
 </body>
 </html>
