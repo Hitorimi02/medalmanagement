@@ -4,13 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>設定</title>
+    <link rel="stylesheet" href="../menu/menu_style.css"> <!-- メニュー用CSS -->
     <link rel="stylesheet" href="settings_style.css">
 </head>
 <body>
+    <!-- メニュー読み込みコンテナ -->
+    <div id="menu-container"></div>
+
     <h1>設定</h1>
     <div class="settings-container">
-        <button id="reset-button">すべてのデータを削除</button>
+        <button1 id="reset-button">すべてのデータを削除</button>
     </div>
+
+    <script>
+        fetch('../menu/menu.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('menu-container').innerHTML = data;
+
+                const menuScript = document.createElement('script');
+                menuScript.src = "../menu/menu_script.js";
+                menuScript.onload = () => {
+                    if (typeof initializeMenu === 'function') initializeMenu();
+                };
+                document.body.appendChild(menuScript);
+            });
+    </script>
     <script src="settings_script.js"></script>
 </body>
 </html>

@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>メダル枚数入力</title>
     <link rel="stylesheet" href="edit_medal_style.css"> <!-- メダル入力ページ用のCSS -->
+    <link rel="stylesheet" href="../menu/menu_style.css"> <!-- メニュー用CSS -->
 </head>
 <body>
+    <!-- メニュー読み込みコンテナ -->
+    <div id="menu-container"></div>
+
     <h1>メダル枚数入力</h1>
     <p id="selected-date"></p>
     <div class="form-container">
@@ -22,6 +26,21 @@
         <div id="difference" class="difference-card"></div>
     </div>
     <button id="back-button" onclick="goBack()">カレンダーに戻る</button>
+
+    <script>
+        fetch('../menu/menu.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('menu-container').innerHTML = data;
+
+                const menuScript = document.createElement('script');
+                menuScript.src = "../menu/menu_script.js";
+                menuScript.onload = () => {
+                    if (typeof initializeMenu === 'function') initializeMenu();
+                };
+                document.body.appendChild(menuScript);
+            });
+    </script>
     <script src="edit_medal_script.js"></script> <!-- メダル入力ページ用のJavaScript -->
 </body>
 </html>

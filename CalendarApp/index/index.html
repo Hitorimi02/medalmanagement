@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>カレンダーアプリ</title>
-    <link rel="stylesheet" href="../common/menu_style.css"> <!-- 共通メニューのスタイル -->
+    <link rel="stylesheet" href="../menu/menu_style.css"> <!-- 共通メニューのスタイル -->
     <link rel="stylesheet" href="index_style.css"> <!-- ページ固有のスタイル -->
 </head>
 <body>
@@ -23,14 +23,20 @@
     <!-- スクリプト -->
     <script>
         // メニューを外部ファイルから読み込む
-        fetch('../common/menu.html')
+        fetch('../menu/menu.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('menu-container').innerHTML = data;
 
-                // メニュースクリプトの読み込み
+                // メニュースクリプトの読み込みと初期化
                 const menuScript = document.createElement('script');
-                menuScript.src = "../common/menu_script.js";
+                menuScript.src = "../menu/menu_script.js";
+                menuScript.onload = () => {
+                    // メニュースクリプトの初期化関数を実行する
+                    if (typeof initializeMenu === 'function') {
+                        initializeMenu();
+                    }
+                };
                 document.body.appendChild(menuScript);
             });
     </script>

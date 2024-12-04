@@ -5,11 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>メダル遷移表</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js の CDN -->
+    <link rel="stylesheet" href="../menu/menu_style.css"> <!-- メニュー用CSS -->
     <link rel="stylesheet" href="medal_transition_style.css">
 </head>
 <body>
+    <!-- メニュー読み込みコンテナ -->
+    <div id="menu-container"></div>
+
     <h1>店舗ごとのメダル遷移</h1>
-    
     <div class="store-selector">
         <label for="store-select">店舗を選択してください：</label>
         <select id="store-select">
@@ -21,6 +24,20 @@
         <canvas id="medal-chart"></canvas>
     </div>
 
+    <script>
+        fetch('../menu/menu.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('menu-container').innerHTML = data;
+
+                const menuScript = document.createElement('script');
+                menuScript.src = "../menu/menu_script.js";
+                menuScript.onload = () => {
+                    if (typeof initializeMenu === 'function') initializeMenu();
+                };
+                document.body.appendChild(menuScript);
+            });
+    </script>
     <script src="medal_transition_script.js"></script>
 </body>
 </html>

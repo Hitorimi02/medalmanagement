@@ -15,25 +15,32 @@
     z-index: 1000;
 }
 
+/* メニュー内リンクの文字を左寄せ */
 #menu ul {
+    padding: 10px;
+    margin: 0;
     list-style: none;
-    padding: 0;
 }
 
 #menu ul li {
     margin: 10px 0;
+    text-align: left; /* 左寄せ */
 }
 
 #menu ul li a {
     color: white;
     text-decoration: none;
+    display: block; /* ブロック要素にして配置を整える */
+    padding: 1px 0; /* 上下の余白を統一 */
+    padding-left: 10px; /* 左の余白を追加して見やすく */
+    font-size: 16px; /* 文字サイズを統一 */
 }
 
 #menu ul li a:hover {
     text-decoration: underline;
 }
 
-#close-menu {
+#menu #close-menu {
     background-color: transparent;
     color: white;
     border: none;
@@ -42,6 +49,7 @@
     cursor: pointer;
 }
 
+/* メニューボタン */
 #menu-button {
     position: fixed;
     top: 10px;
@@ -49,10 +57,14 @@
     background-color: #007BFF;
     color: white;
     border: none;
-    padding: 10px;
+    padding: 5px 10px; /* ボタンサイズを統一 */
     border-radius: 4px;
+    font-size: 20px; /* 文字サイズを統一 */
     cursor: pointer;
     z-index: 1001;
+    width: auto; /* 幅を自動に設定 */
+    max-width: 200px; /* 最大幅を指定 */
+    box-sizing: content-box; /* パディングを含めない */
 }
 
 #menu-button:hover {
