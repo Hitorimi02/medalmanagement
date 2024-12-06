@@ -37,6 +37,7 @@ label {
     font-weight: bold;
 }
 input[type="number"] {
+    box-sizing: border-box; /*フィールドのサイズ*/
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
