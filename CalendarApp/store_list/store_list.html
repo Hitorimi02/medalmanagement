@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>店舗リスト</title>
     <link rel="stylesheet" href="../menu/menu_style.css"> <!-- メニュー用CSS -->
-    <link rel="stylesheet" href="store_list_style.css"> <!-- 店舗リスト用CSS -->
+    <link rel="stylesheet" href="store_list_style.css"> <!-- ページ固有のCSS -->
 </head>
 <body>
-    <!-- メニュー -->
-    <div id="menu"></div>
-    <!-- メニューボタン -->
-    <button id="menu-button">≡</button>
+    <!-- メニュー読み込みコンテナ -->
+    <div id="menu-container"></div>
 
     <header>
         <h1>店舗リスト</h1>
@@ -23,7 +21,27 @@
         </ul>
     </main>
 
-    <script src="../menu/menu_script.js"></script> <!-- メニュー用スクリプト -->
-    <script src="store_list_script.js"></script> <!-- 店舗リスト用スクリプト -->
+    <script>
+        // メニューHTML、CSS、JSを動的に読み込む
+        fetch('../menu/menu.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('menu-container').innerHTML = data;
+
+                const menuStyle = document.createElement('link');
+                menuStyle.rel = 'stylesheet';
+                menuStyle.href = '../menu/menu_style.css';
+                document.head.appendChild(menuStyle);
+
+                const menuScript = document.createElement('script');
+                menuScript.src = '../menu/menu_script.js';
+                menuScript.onload = () => {
+                    if (typeof initializeMenu === 'function') initializeMenu();
+                };
+                document.body.appendChild(menuScript);
+            });
+    </script>
+
+    <script src="store_list_script.js"></script> <!-- 店舗リスト用JavaScript -->
 </body>
 </html>

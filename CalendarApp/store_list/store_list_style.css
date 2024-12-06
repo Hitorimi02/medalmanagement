@@ -1,25 +1,42 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    margin: 20px;
+/* 店舗リスト用のスタイル */
+#store-list {
+    max-width: 500px; /* リストの最大幅を500pxに制限 */
+    margin: 0 auto; /* 上下の余白を0、左右の余白を自動で設定し、中央揃えに */
+    padding: 0; /* リストの内側の余白を0に設定 */
+    list-style: none; /* リストアイテムの前に表示される記号（デフォルトの丸点）を削除 */
 }
 
+/* タイトルのスタイル */
 h1 {
-    text-align: center;
-    color: #333;
+    text-align: center; /* タイトルを横方向に中央揃え */
+    font-size: 2em; /* フォントサイズを大きく設定 */
+    color: #333; /* 文字色をダークグレーに設定 */
+    margin: 20px 0; /* タイトルの上下に余白を追加 */
 }
 
-ul {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 0;
-    list-style: none;
+/* 店舗リスト内の各アイテム（li）のスタイル */
+#store-list li {
+    padding: 10px; /* 各リストアイテムの内側に10pxの余白を設定 */
+    background: #fff; /* 背景色を白に設定 */
+    margin-bottom: 10px; /* 各リストアイテムの下に10pxの余白を設定 */
+    border-radius: 5px; /* 角を5pxで丸くする */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* リストアイテムに軽いシャドウを付ける */
+    display: flex; /* フレックスボックスでアイテムを並べる */
+    justify-content: space-between; /* アイテム間を均等に配置 */
+    align-items: center; /* アイテムを垂直方向に中央揃え */
 }
 
-li {
-    padding: 10px;
-    background: #fff;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+/* 店舗情報（店舗名と保存期間）のスタイル */
+#store-list li span {
+    font-size: 16px; /* フォントサイズを16pxに設定 */
+    color: #333; /* 文字色をダークグレーに設定 */
+}
+
+/* 削除ボタン（ゴミ箱アイコン）のスタイル */
+#store-list li button {
+    background: none; /* 背景をなしに設定 */
+    border: none; /* ボーダーをなしに設定 */
+    cursor: pointer; /* カーソルをポインターに変更 */
+    font-size: 1.2em; /* フォントサイズを1.2倍に設定 */
+    color: red; /* 文字色を赤に設定 */
 }

@@ -21,15 +21,7 @@ function displayStores() {
         const { medalDuration = '不明' } = storeData; // 保存期間を取得（デフォルトは「不明」）
 
         const li = document.createElement('li');
-        li.style.display = 'flex';
-        li.style.justifyContent = 'space-between';
-        li.style.alignItems = 'center';
-        li.style.marginBottom = '10px';
-        li.style.padding = '10px';
-        li.style.border = '1px solid #ccc';
-        li.style.borderRadius = '5px';
-        li.style.backgroundColor = '#f9f9f9';
-
+        
         // 店舗名と保存期間を表示
         const storeInfo = document.createElement('span');
         storeInfo.textContent = `${storeName} - 保存期間: ${medalDuration}日`;
@@ -38,13 +30,6 @@ function displayStores() {
         // 削除ボタンを作成
         const deleteButton = document.createElement('button');
         deleteButton.innerHTML = '🗑️'; // ゴミ箱アイコン
-        deleteButton.style.background = 'none';
-        deleteButton.style.border = 'none';
-        deleteButton.style.cursor = 'pointer';
-        deleteButton.style.fontSize = '1.2em';
-        deleteButton.style.color = 'red';
-
-        // 削除ボタンのクリックイベントを設定
         deleteButton.addEventListener('click', () => {
             // 該当店舗をローカルストレージから削除
             delete storesData[storeName];
@@ -52,7 +37,7 @@ function displayStores() {
             displayStores(); // 再描画
         });
 
-        // リストアイテムに削除ボタンを追加
+        // 削除ボタンをリストアイテムに追加
         li.appendChild(deleteButton);
         storeList.appendChild(li);
     });

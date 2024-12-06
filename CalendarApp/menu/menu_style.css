@@ -1,5 +1,5 @@
-/* メニュー共通スタイル */
-#menu {
+/* メニュー全体 */
+#menu-container #menu {
     position: fixed;
     top: 0;
     left: -100%;
@@ -16,31 +16,31 @@
 }
 
 /* メニュー内リンクの文字を左寄せ */
-#menu ul {
+#menu-container #menu ul {
     padding: 10px;
     margin: 0;
     list-style: none;
 }
 
-#menu ul li {
+#menu-container #menu ul li {
     margin: 10px 0;
     text-align: left; /* 左寄せ */
 }
 
-#menu ul li a {
+#menu-container #menu ul li a {
     color: white;
     text-decoration: none;
-    display: block; /* ブロック要素にして配置を整える */
-    padding: 1px 0; /* 上下の余白を統一 */
-    padding-left: 10px; /* 左の余白を追加して見やすく */
-    font-size: 16px; /* 文字サイズを統一 */
+    display: block;
+    padding: 1px 0;
+    padding-left: 10px;
+    font-size: 16px;
 }
 
-#menu ul li a:hover {
+#menu-container #menu ul li a:hover {
     text-decoration: underline;
 }
 
-#menu #close-menu {
+#menu-container #menu #close-menu {
     background-color: transparent;
     color: white;
     border: none;
@@ -50,27 +50,27 @@
 }
 
 /* メニューボタン */
-#menu-button {
+#menu-container #menu-button {
     position: fixed;
     top: 10px;
     left: 10px;
     background-color: #007BFF;
     color: white;
     border: none;
-    padding: 5px 10px; /* ボタンサイズを統一 */
+    padding: 5px 10px;
     border-radius: 4px;
-    font-size: 20px; /* 文字サイズを統一 */
+    font-size: 20px;
     cursor: pointer;
     z-index: 1001;
-    width: auto; /* 幅を自動に設定 */
-    max-width: 200px; /* 最大幅を指定 */
-    box-sizing: content-box; /* パディングを含めない */
+    width: auto;
+    max-width: 200px;
+    box-sizing: content-box;
 }
 
-#menu-button:hover {
+#menu-container #menu-button:hover {
     background-color: #0056b3;
 }
 
-#menu.open {
+#menu-container #menu.open {
     left: 0;
 }
