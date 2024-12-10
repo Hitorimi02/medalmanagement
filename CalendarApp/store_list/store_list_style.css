@@ -1,5 +1,6 @@
 /* 店舗リスト用のスタイル */
 #store-list {
+    font-family: 'Arial';
     max-width: 500px; /* リストの最大幅を500pxに制限 */
     margin: 0 auto; /* 上下の余白を0、左右の余白を自動で設定し、中央揃えに */
     padding: 0; /* リストの内側の余白を0に設定 */

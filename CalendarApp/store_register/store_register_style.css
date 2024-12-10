@@ -1,6 +1,6 @@
 /* 全体のフォントと背景色を設定 */
 #store-register {
-    font-family: Arial, sans-serif; /* フォントをArialまたはサンセリフ系に設定 */
+    font-family: Arial; /* フォントをArialまたはサンセリフ系に設定 */
     background-color: #fff;     /* 背景色を白に設定 */
     margin: 20px;                  /* ページ全体に20pxの余白を設定 */
 }
