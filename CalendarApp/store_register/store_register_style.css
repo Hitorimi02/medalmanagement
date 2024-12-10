@@ -23,7 +23,8 @@
 }
 
 /* 見出しのスタイル */
-#store-register h1 {
+h1 {
+    font-family: sans-serif;
     text-align: center; /* テキストを中央揃え */
     margin: 20px auto;  /* 上下20pxの余白、左右を自動で中央寄せ */
     color: #333;        /* 文字色を濃い灰色に設定 */

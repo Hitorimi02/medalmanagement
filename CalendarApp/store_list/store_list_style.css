@@ -9,6 +9,7 @@
 
 /* タイトルのスタイル */
 h1 {
+    font-family: sans-serif;
     text-align: center; /* タイトルを横方向に中央揃え */
     font-size: 2em; /* フォントサイズを大きく設定 */
     color: #333; /* 文字色をダークグレーに設定 */
