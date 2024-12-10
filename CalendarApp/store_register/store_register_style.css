@@ -1,57 +1,63 @@
 /* 全体のフォントと背景色を設定 */
-body {
+#store-register {
     font-family: Arial, sans-serif; /* フォントをArialまたはサンセリフ系に設定 */
-    background-color: #f9f9f9;     /* 背景色を淡いグレーに設定 */
-    margin: 20px;                   /* ページ全体に20pxの余白を設定 */
+    background-color: #fff;     /* 背景色を白に設定 */
+    margin: 20px;                  /* ページ全体に20pxの余白を設定 */
 }
 
 /* 全ての要素にbox-sizingをborder-boxに設定 */
-*, *::before, *::after {
-    box-sizing: border-box;         /* パディングやボーダーを含めてサイズを計算 */
+#store-register *, 
+#store-register *::before, 
+#store-register *::after {
+    box-sizing: border-box;        /* パディングやボーダーを含めてサイズを計算 */
 }
 
 /* フォームを中央寄せでスタイル設定 */
-.form-container {
-    max-width: 500px;               /* 最大幅を500pxに設定 */
-    margin: 0 auto;                 /* 上下の余白0、左右を自動で中央寄せ */
-    padding: 20px;                  /* 内部に20pxの余白を設定 */
-    background: #fff;               /* 背景色を白に設定 */
-    border-radius: 10px;            /* 角を10pxの半径で丸める */
+#store-register .form-container {
+    max-width: 500px;              /* 最大幅を500pxに設定 */
+    margin: 0 auto;                /* 上下の余白0、左右を自動で中央寄せ */
+    padding: 20px;                 /* 内部に20pxの余白を設定 */
+    background: #fff;              /* 背景色を白に設定 */
+    border-radius: 10px;           /* 角を10pxの半径で丸める */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 影をつけて立体感を持たせる */
 }
 
 /* 見出しのスタイル */
-h1 {
-    text-align: center;             /* 見出しを中央揃え */
-    color: #333;                    /* 見出しの文字色を濃い灰色に設定 */
+#store-register h1 {
+    text-align: center; /* テキストを中央揃え */
+    margin: 20px auto;  /* 上下20pxの余白、左右を自動で中央寄せ */
+    color: #333;        /* 文字色を濃い灰色に設定 */
 }
 
+
+
 /* ラベルのスタイル */
-label {
-    display: block;                 /* ラベルをブロック要素にして、改行させる */
-    margin-bottom: 10px;            /* ラベル下に10pxの余白を設定 */
-    font-weight: bold;              /* 太字に設定 */
+#store-register label {
+    display: block;                /* ラベルをブロック要素にして、改行させる */
+    margin-bottom: 10px;           /* ラベル下に10pxの余白を設定 */
+    font-weight: bold;             /* 太字に設定 */
 }
 
 /* 入力フィールドとボタンのスタイル */
-input, button {
-    width: 100%;                    /* 幅を親要素に対して100%に設定 */
-    padding: 10px;                  /* 内側に10pxの余白を設定 */
-    margin-bottom: 20px;            /* 下に20pxの余白を設定 */
-    border: 1px solid #ccc;         /* 薄い灰色の枠線を設定 */
-    border-radius: 5px;             /* 角を5pxの半径で丸める */
+#store-register input, 
+#store-register button {
+    width: 100%;                   /* 幅を親要素に対して100%に設定 */
+    padding: 10px;                 /* 内側に10pxの余白を設定 */
+    margin-bottom: 20px;           /* 下に20pxの余白を設定 */
+    border: 1px solid #ccc;        /* 薄い灰色の枠線を設定 */
+    border-radius: 5px;            /* 角を5pxの半径で丸める */
 }
 
 /* ボタンの個別スタイル */
-button {
-    background: #007bff;            /* 背景色を青色に設定 */
-    color: white;                   /* 文字色を白に設定 */
-    border: none;                   /* 枠線をなくす */
-    cursor: pointer;                /* カーソルをポインタに変更 */
-    font-size: 1em;                  /* フォントサイズを標準サイズに設定 */
+#store-register button {
+    background: #007bff;           /* 背景色を青色に設定 */
+    color: white;                  /* 文字色を白に設定 */
+    border: none;                  /* 枠線をなくす */
+    cursor: pointer;               /* カーソルをポインタに変更 */
+    font-size: 1em;                /* フォントサイズを標準サイズに設定 */
 }
 
 /* ボタンのホバー時のスタイル */
-button:hover {
-    background: #0056b3;            /* ホバー時に背景色を濃い青に変更 */
+#store-register button:hover {
+    background: #0056b3;           /* ホバー時に背景色を濃い青に変更 */
 }
