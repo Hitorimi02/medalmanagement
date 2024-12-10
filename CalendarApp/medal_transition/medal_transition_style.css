@@ -15,3 +15,34 @@ select {
     width: 200px;
     margin-bottom: 20px;
 }
+
+/* ボタンのスタイル */
+button {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #007bff; /* 青色 */
+    color: white; /* 白文字 */
+    border: none;
+    border-radius: 5px; /* 角を丸く */
+    cursor: pointer;
+    margin: 10px; /* ボタン間にスペースを追加 */
+    transition: background-color 0.3s ease; /* ホバー時のアニメーション */
+}
+
+/* ボタン ホバー時 */
+button:hover {
+    background-color: #0056b3; /* 濃い青色 */
+}
+
+/* ボタン 無効状態 */
+button:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+/* チャートのスタイル */
+canvas {
+    max-width: 100%;
+    height: auto;
+}
