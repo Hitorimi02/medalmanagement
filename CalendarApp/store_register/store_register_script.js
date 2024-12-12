@@ -18,10 +18,18 @@ document.getElementById('store-form').addEventListener('submit', function(event)
         return;
     }
 
+    // 現在の日時を取得
+    const createdAt = new Date().toISOString(); // 作成日時をISO形式で記録
+
     // 新店舗を追加
-    storesData[storeName] = { medalDuration: storePeriod, medals: {} }; // 保存期間とメダルデータを初期化
+    storesData[storeName] = { 
+        medalDuration: storePeriod, 
+        createdAt: createdAt, // 作成日時を保存
+        medals: {}           // メダルデータを初期化
+    };
     localStorage.setItem('storesData', JSON.stringify(storesData));
 
     alert(`店舗 "${storeName}" を登録しました。`);
     displayStores(); // 登録後にリストを更新
 });
+

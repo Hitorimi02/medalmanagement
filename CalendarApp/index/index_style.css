@@ -69,3 +69,32 @@ body {
 .sunday {
     color: red;
 }
+
+/* 現在の日付に青い長方形をつける */
+.day.today {
+    border: 2px solid blue;
+    padding: 5px 10px; /* 横に長い長方形になるように調整 */
+    color: blue;
+    font-weight: bold;
+    background-color: white;
+    text-align: center;
+}
+
+#store-status {
+    margin-top: 20px;
+    padding: 10px;
+    border: 2px solid #000; /* 枠線を追加 */
+    border-radius: 5px;      /* 角を丸くする */
+    background-color: #f9f9f9; /* 背景色を追加 */
+    font-size: 14px;         /* フォントサイズを調整 */
+}
+
+#store-status div {
+    margin-bottom: 10px;
+}
+
+#store-status span {
+    font-weight: bold;
+}
+
+

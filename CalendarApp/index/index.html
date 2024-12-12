@@ -20,6 +20,9 @@
     </div>
     <div id="calendar"></div>
 
+    <!-- 店舗詳細表示部分 -->
+    <div id="store-details"></div>
+
     <!-- スクリプト -->
     <script>
         // メニューを外部ファイルから読み込む
@@ -32,7 +35,6 @@
                 const menuScript = document.createElement('script');
                 menuScript.src = "../menu/menu_script.js";
                 menuScript.onload = () => {
-                    // メニュースクリプトの初期化関数を実行する
                     if (typeof initializeMenu === 'function') {
                         initializeMenu();
                     }
@@ -43,3 +45,5 @@
     <script src="index_script.js"></script>
 </body>
 </html>
+
+
