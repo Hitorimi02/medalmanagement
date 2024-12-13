@@ -66,12 +66,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // 店舗情報を表示する関数
     function StoreDetails() {
         console.log("StoreDetailsが呼び出されました");
-    
+
         const storesData = JSON.parse(localStorage.getItem('storesData')) || {};
         console.log("取得したstoresData:", storesData); // デバッグ用
         const storeDetailsDiv = document.getElementById('store-details');
         storeDetailsDiv.innerHTML = ''; // 既存の情報をクリア
-    
+
         // 各店舗のデータを取得して残り日数でソート
         const sortedStores = Object.keys(storesData)
             .map(storeName => {
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const medals = lastSavedDate ? medalsData[lastSavedDate] : 0;
                 const duration = storesData[storeName].medalDuration || 0;
                 const daysLeft = calculateDaysLeft(lastSavedDate, duration); // 残り日数を計算
-    
+
                 return {
                     name: storeName,
                     lastSavedDate: lastSavedDate || "記録なし",
@@ -91,12 +91,12 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .sort((a, b) => a.daysLeft - b.daysLeft) // 残り日数が少ない順にソート
             .slice(0, 2); // 残り日数が少ない2店舗を選択
-    
+
         // 店舗情報を表示
         sortedStores.forEach(store => {
             // 残り日数が7日以内の場合は赤字スタイルを適用
             const daysLeftStyle = store.daysLeft <= 7 && store.daysLeft >= 0 ? 'style="color: red;"' : '';
-    
+
             const storeInfo = `
                 <div>
                     <strong>店舗名:</strong> ${store.name}<br>
@@ -109,36 +109,28 @@ document.addEventListener('DOMContentLoaded', () => {
             storeDetailsDiv.innerHTML += storeInfo;
         });
     }
-    
-    
-    
-    
 
     // 残り日数を計算する関数
     function calculateDaysLeft(lastSavedDate, duration) {
         if (!lastSavedDate || !duration) {
             return -1; // 日付や保存期間が存在しない場合、有効期限切れとして扱う
         }
-    
+
         const today = new Date(); // 今日の日付
         const savedDate = new Date(lastSavedDate); // 最終保存日
         const expiryDate = new Date(savedDate); // 有効期限の日付
         expiryDate.setDate(savedDate.getDate() + duration); // 保存期間を加算
-    
+
         console.log("今日の日付:", today);
         console.log("保存された日付:", savedDate);
         console.log("有効期限の日付:", expiryDate);
-    
+
         const diffTime = expiryDate - today; // 有効期限と今日の日付の差分
         const remainingDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // ミリ秒を日数に変換
-    
+
         console.log("計算された残り日数:", remainingDays);
         return remainingDays; // 正の値なら有効期限までの残り日数、負の値なら期限切れ
     }
-    
-    
-    
-    
 
     // 前月・次月ボタンの処理
     document.getElementById('prev-month').addEventListener('click', () => {
@@ -162,4 +154,3 @@ document.addEventListener('DOMContentLoaded', () => {
     // 最初にカレンダーを表示
     updateCalendar();
 });
-

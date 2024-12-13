@@ -1,48 +1,37 @@
-body {
+#medal-transition {
     font-family: Arial, sans-serif;
     padding: 20px;
     background-color: #f4f4f4;
     text-align: center;
 }
 
-.store-selector {
+#medal-transition .store-selector {
     margin-bottom: 20px;
 }
 
-select {
+#medal-transition select {
     padding: 10px;
     font-size: 1em;
     width: 200px;
     margin-bottom: 20px;
 }
 
-/* ボタンのスタイル */
-button {
-    padding: 10px 20px;
-    font-size: 1em;
-    background-color: #007bff; /* 青色 */
-    color: white; /* 白文字 */
-    border: none;
-    border-radius: 5px; /* 角を丸く */
-    cursor: pointer;
-    margin: 10px; /* ボタン間にスペースを追加 */
-    transition: background-color 0.3s ease; /* ホバー時のアニメーション */
-}
+
 
 /* ボタン ホバー時 */
-button:hover {
+#medal-transition button:hover {
     background-color: #0056b3; /* 濃い青色 */
 }
 
 /* ボタン 無効状態 */
-button:disabled {
+#medal-transition button:disabled {
     background-color: #ccc;
     color: #666;
     cursor: not-allowed;
 }
 
 /* チャートのスタイル */
-canvas {
+#medal-transition canvas {
     max-width: 100%;
     height: auto;
 }

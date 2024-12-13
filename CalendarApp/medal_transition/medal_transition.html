@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>メダル遷移表</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js の CDN -->
-    <link rel="stylesheet" href="../menu/menu_style.css"> <!-- メニュー用CSS -->
     <link rel="stylesheet" href="medal_transition_style.css">
+    <link rel="stylesheet" href="../menu/menu_style.css"> <!-- メニュー用CSS -->
 </head>
-<body>
+<body id="medal-transition">
     <!-- メニュー読み込みコンテナ -->
     <div id="menu-container"></div>
 
@@ -23,6 +23,10 @@
     <div id="chart-container" style="max-width: 600px; margin: 0 auto;">
         <canvas id="medal-chart"></canvas>
     </div>
+
+    <!-- 前へ 次へ ボタン -->
+    <button id="prev-button" onclick="changeData('prev')" disabled>前へ</button>
+    <button id="next-button" onclick="changeData('next')">次へ</button>
 
     <script>
         fetch('../menu/menu.html')
@@ -41,9 +45,3 @@
     <script src="medal_transition_script.js"></script>
 </body>
 </html>
-
-<!-- 前へ 次へ ボタン -->
-<button id="prev-button" onclick="changeData('prev')" disabled>前へ</button>
-<button id="next-button" onclick="changeData('next')">次へ</button>
-
-<canvas id="medal-chart" width="400" height="200"></canvas>
