@@ -8,14 +8,5 @@
         <li><a href="../store_list/store_list.html">店舗リスト</a></li>
         <li><a href="../medal_transition/medal_transition.html">メダル遷移</a></li>
     </ul>
-    <button id="login-btn">Google でログイン</button>
 </div>
 <button id="menu-button">≡</button>
-<script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js"></script>
-
-<script type="module">
-    import { auth, provider } from '../firebase.js';
-    import { initializeMenu } from './menu.js'; // メニューのスクリプトをインポート
-    initializeMenu();
-</script>
