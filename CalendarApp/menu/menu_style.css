@@ -78,7 +78,6 @@
 
 /* ログインボタンを左下に配置 */
 #menu-container #menu #login-btn {
-    margin-top: auto; /* 自動で下に配置 */
     align-self: flex-start; /* 左揃え */
     border: none;
     padding: 10px 15px;
