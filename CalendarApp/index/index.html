@@ -21,55 +21,11 @@
     <div id="calendar"></div>
 
     <!-- 店舗詳細表示部分 -->
-    <div id="store-details"></div>
-
-    <!-- Firebase SDK -->
-    <script type="module">
-        // Firebase SDK のインポート
-        import { initializeApp } from "firebase/app";
-        import { getAnalytics } from "firebase/analytics";
-        import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-
-        // Firebase 設定
-        const firebaseConfig = {
-            apiKey: "AIzaSyBAHi8NT1GRAX1SLVzyQZicXtgbpBxZFZM",
-            authDomain: "medalmanagement-02.firebaseapp.com",
-            projectId: "medalmanagement-02",
-            storageBucket: "medalmanagement-02.firebasestorage.app",
-            messagingSenderId: "294414031611",
-            appId: "1:294414031611:web:05d13206f88b8aadec6e5e",
-            measurementId: "G-NSP8YNXKM9"
-        };
-
-        // Firebase 初期化
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        const auth = getAuth(app);
-
-        // ログインボタンの動作
-        function login() {
-            const email = prompt("Enter your email:");
-            const password = prompt("Enter your password:");
-
-            signInWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    // ログイン成功
-                    const user = userCredential.user;
-                    alert("ログイン成功！: " + user.email);
-                })
-                .catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    alert("ログイン失敗: " + errorMessage);
-                });
-        }
-    </script>
-
-    <!-- ログインボタン -->
-    <button id="login-button" onclick="login()">ログイン</button>
-
-    <!-- メニューを外部ファイルから読み込む部分 -->
+    <div id="store-details"></div>  
+    
+    <!-- スクリプト -->
     <script>
+        // メニューを外部ファイルから読み込む
         fetch('../menu/menu.html')
             .then(response => response.text())
             .then(data => {
@@ -86,8 +42,7 @@
                 document.body.appendChild(menuScript);
             });
     </script>
-
-    <script src="index_script.js"></script>
+    <script type="module" src="index_script.js"></script>
 </body>
 </html>
 
