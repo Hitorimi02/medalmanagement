@@ -18,3 +18,44 @@ button1 {
 button1:hover {
     background-color: #e03e3e;
 }
+
+/* 確認ダイアログ全体のスタイル */
+.confirm-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    z-index: 1000;
+    width: 350px;
+    padding: 20px;
+    text-align: center;
+}
+
+/* 確認ダイアログのボタン */
+.confirm-content button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+#confirm-yes {
+    background-color: #e74c3c;
+    color: white;
+}
+
+#confirm-no {
+    background-color: #ccc;
+    color: black;
+}
+
+#confirm-yes:hover, #confirm-no:hover {
+    opacity: 0.8;
+}
+

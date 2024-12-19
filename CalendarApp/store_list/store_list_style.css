@@ -42,3 +42,108 @@ h1 {
     font-size: 1.2em; /* フォントサイズを1.2倍に設定 */
     color: red; /* 文字色を赤に設定 */
 }
+
+.confirm-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.confirm-content {
+    text-align: center;
+}
+
+#confirm-yes:hover, #confirm-no:hover {
+    opacity: 0.8;
+}
+
+#message-container {
+    padding: 10px;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+#message-container.success {
+    color: green;
+    background-color: #e8f5e9;
+    border: 1px solid green;
+}
+
+#message-container.error {
+    color: red;
+    background-color: #ffebee;
+    border: 1px solid red;
+}
+
+#deleted-stores {
+    margin-top: 20px;
+    padding: 0;
+    list-style: none;
+}
+
+#deleted-stores li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+#deleted-stores li {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9f9f9;
+}
+
+#deleted-stores button.restore-store {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+#deleted-stores button.restore-store:hover {
+    background-color: #0056b3;
+}
+
+#deleted-stores li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+}
+
+#deleted-stores .restore-store {
+    margin-left: auto;
+    background-color: blue;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#deleted-stores span {
+    margin-left: 10px;
+    color: gray;
+}
+

@@ -5,7 +5,7 @@ document.getElementById('store-form').addEventListener('submit', function(event)
     const storePeriod = parseInt(document.getElementById('store-period').value.trim(), 10); // 保存期間
 
     if (!storeName || isNaN(storePeriod)) {
-        alert('店舗名と保存期間を正しく入力してください。');
+        showMessage('店舗名と保存期間を正しく入力してください。', 'error');
         return;
     }
 
@@ -14,7 +14,7 @@ document.getElementById('store-form').addEventListener('submit', function(event)
 
     // 新しい店舗がすでに登録されているか確認
     if (storesData[storeName]) {
-        alert(`店舗 "${storeName}" は既に登録されています。`);
+        showMessage(`店舗 「${storeName}」 は既に登録されています。`, 'error');
         return;
     }
 
@@ -29,7 +29,21 @@ document.getElementById('store-form').addEventListener('submit', function(event)
     };
     localStorage.setItem('storesData', JSON.stringify(storesData));
 
-    alert(`店舗 "${storeName}" を登録しました。`);
+    showMessage(`店舗 「${storeName}」 を登録しました。`, 'success');
     displayStores(); // 登録後にリストを更新
+    document.getElementById('store-form').reset(); // フォームをリセット
 });
 
+// メッセージ表示関数
+function showMessage(message, type) {
+    const messageContainer = document.getElementById('message-container');
+    messageContainer.textContent = message;
+    messageContainer.className = ''; // 既存クラスをクリア
+    messageContainer.classList.add(type); // success または error クラスを追加
+
+    // 5秒後にメッセージを消す
+    setTimeout(() => {
+        messageContainer.textContent = '';
+        messageContainer.className = '';
+    }, 5000);
+}

@@ -26,6 +26,7 @@ function getStoreData(storeName) {
     return storesData[storeName] || { medalDuration: null, medals: {} };
 }
 
+// 店舗データを保存
 function saveStoreData(storeName, date, medalCount) {
     const storesData = JSON.parse(localStorage.getItem(STORES_KEY)) || {};
 
@@ -45,7 +46,7 @@ function saveStoreData(storeName, date, medalCount) {
     localStorage.setItem(STORES_KEY, JSON.stringify(storesData));
 }
 
-
+// 前回のメダルデータを取得
 function getLastMedal(storeName, date) {
     const storesData = JSON.parse(localStorage.getItem(STORES_KEY)) || {};
     const storeData = storesData[storeName] || { medals: {} };
@@ -58,7 +59,7 @@ function getLastMedal(storeName, date) {
 }
 
 // フォーム送信時の処理
-document.getElementById('medal-form').addEventListener('submit', function(event) {
+document.getElementById('medal-form').addEventListener('submit', function (event) {
     event.preventDefault();
 
     const storeName = document.getElementById('store-select').value;
@@ -84,19 +85,29 @@ document.getElementById('medal-form').addEventListener('submit', function(event)
     const differenceEl = document.getElementById('difference');
     if (previousMedalData) {
         const difference = medals - previousMedalData.medals;
-        differenceEl.textContent = `前回 (${previousMedalData.date}) 比：${difference} 枚`;
+        differenceEl.textContent = `前回 (${previousMedalData.date}) 比：${difference} 枚 - 保存しました`;
     } else {
-        differenceEl.textContent = '今回が最初の記録です';
+        differenceEl.textContent = `今回が最初の記録です - 保存しました`;
     }
 
-    alert(`店舗 "${storeName}" のメダルが保存されました: ${medals} 枚`);
+    // 保存完了のメッセージを表示（アラートを廃止）
+    const saveMessage = document.getElementById('save-message');
+    saveMessage.textContent = `店舗 "${storeName}" のメダルが保存されました: ${medals} 枚`;
+    saveMessage.style.display = 'block';
+
+    // 数秒後に保存メッセージを非表示にする
+    setTimeout(() => {
+        saveMessage.style.display = 'none';
+    }, 3000);
+
+    // 入力欄をクリア
+    document.getElementById('medals').value = '';
 });
 
 // 「戻る」ボタンの処理
 function goBack() {
     window.location.href = "../index/index.html"; // カレンダーのページへ遷移
 }
-
 
 // ページ読み込み時に店舗一覧を初期化
 populateStoreDropdown();
