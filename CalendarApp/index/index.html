@@ -53,6 +53,7 @@
 
     <!-- メニューを外部ファイルから読み込む部分 -->
     <script>
+        // メニューを外部ファイルから読み込む
         fetch('../menu/menu.html')
             .then(response => response.text())
             .then(data => {
@@ -69,8 +70,7 @@
                 document.body.appendChild(menuScript);
             });
     </script>
-
-    <script src="index_script.js"></script>
+    <script type="module" src="index_script.js"></script>
 </body>
 </html>
 
