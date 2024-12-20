@@ -24,7 +24,7 @@ function populateStoreDropdown() {
 function getStoreData(storeName) {
     const storesData = JSON.parse(localStorage.getItem(STORES_KEY)) || {};
     return storesData[storeName] || { medalDuration: null, medals: {} };
-}
+}fa
 
 // 店舗データを保存
 function saveStoreData(storeName, date, medalCount) {
