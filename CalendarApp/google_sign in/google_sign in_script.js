@@ -1,10 +1,11 @@
 import { auth, provider } from './firebase.js';
 import { signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-auth.js";
 import { collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-firestore.js";
-import { db } from "./firebase.js"; // firebase.jsからdbをインポート
+import { db } from "../firebase.js"; // firebase.jsからdbをインポート
 
 // サインイン
 document.getElementById('google-signin-btn').addEventListener('click', () => {
+  console.log("サインインボタンがクリックされました");  // このログが表示されるか確認
   signInWithPopup(auth, provider)
     .then((result) => {
       console.log("サインイン成功:", result.user);
