@@ -56,6 +56,22 @@ function renderMedalTransition(storeNames) {
     });
 
     updateNavigationButtons(dates.length);
+    updateMedalTable(last10Days, last10Medals);
+}
+
+// メダル遷移表を更新
+function updateMedalTable(dates, medals) {
+    const table = document.getElementById('medal-table');
+    const thead = table.querySelector('thead');
+    const tbody = table.querySelector('tbody');
+
+    // ヘッダー更新
+    thead.innerHTML = '<tr><th>日付</th><th>保持メダル数</th></tr>';
+
+    // データ更新
+    tbody.innerHTML = dates.map((date, index) => 
+        `<tr><td>${date}</td><td>${medals[index]}</td></tr>`
+    ).join('');
 }
 
 // ボタンの有効/無効を更新

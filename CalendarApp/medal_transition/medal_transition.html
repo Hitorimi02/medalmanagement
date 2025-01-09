@@ -35,6 +35,30 @@
         .nav-buttons button:hover:not(:disabled) {
             background-color: #0056b3;
         }
+
+        /* メダル遷移表のスタイル */
+        #table-container {
+            max-width: 600px;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
     </style>
 </head>
 <body id="medal-transition">
@@ -57,6 +81,14 @@
     <div class="nav-buttons">
         <button id="prev-button">前へ</button>
         <button id="next-button">次へ</button>
+    </div>
+
+    <!-- メダル遷移表 -->
+    <div id="table-container">
+        <table id="medal-table">
+            <thead></thead>
+            <tbody></tbody>
+        </table>
     </div>
 
     <script>
